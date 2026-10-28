@@ -1,0 +1,116 @@
+/*
+ * Tur pengenalan — menyesuaikan driver.js dengan tema Pesanvo.
+ *
+ * Gaya bawaan driver.js biru dan bersudut tajam; di tengah dashboard yang
+ * seluruhnya hijau dan membulat, ia terbaca seperti dialog dari aplikasi lain.
+ * Yang dilakukan berkas ini cuma memakai token warna dan radius yang sudah
+ * ada — bukan menulis warna baru, supaya tur ikut berubah sendiri saat tema
+ * atau mode gelapnya berubah.
+ */
+
+.driver-popover {
+    /* Membulat mengikuti kartu di dashboard. `--radius` = 0.5rem, dan popover
+       memakai kelipatannya supaya ia terbaca sebagai satu keluarga dengan
+       kartu di belakangnya, bukan sekadar kotak. */
+    border-radius: calc(var(--radius) * 2);
+    background-color: var(--card);
+    color: var(--card-foreground);
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 40px -12px rgb(0 0 0 / 0.28);
+    padding: 1.25rem;
+    max-width: 22rem;
+}
+
+.driver-popover-title {
+    color: var(--foreground);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.driver-popover-description {
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    margin-top: 0.375rem;
+}
+
+.driver-popover-progress-text {
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+}
+
+/* Panah ikut warna kartu di semua arah. Dibiarkan putih bawaan, ia jadi
+   segitiga terang yang menempel di kartu gelap saat mode gelap. */
+.driver-popover-arrow-side-left.driver-popover-arrow { border-left-color: var(--card); }
+.driver-popover-arrow-side-right.driver-popover-arrow { border-right-color: var(--card); }
+.driver-popover-arrow-side-top.driver-popover-arrow { border-top-color: var(--card); }
+.driver-popover-arrow-side-bottom.driver-popover-arrow { border-bottom-color: var(--card); }
+
+.driver-popover-navigation-btns {
+    gap: 0.5rem;
+}
+
+/*
+ | Tombol.
+ |
+ | "Lanjut" memakai hijau yang SAMA dengan menu aktif di sidebar
+ | (`--sidebar-primary`), bukan hijau lain yang mirip. Dua rona hijau berbeda
+ | untuk dua hal yang sama-sama "tindakan utama" membuat orang mengira keduanya
+ | berbeda arti — aturan yang sama sudah berlaku untuk lencana status.
+*/
+.driver-popover-next-btn,
+.driver-popover-prev-btn,
+.driver-popover-close-btn {
+    border-radius: var(--radius);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-shadow: none;
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.driver-popover-next-btn {
+    background-color: var(--sidebar-primary);
+    color: var(--sidebar-primary-foreground);
+    border: 1px solid var(--sidebar-primary);
+    padding: 0.4rem 0.9rem;
+}
+
+.driver-popover-next-btn:hover {
+    background-color: var(--sidebar-primary);
+    color: var(--sidebar-primary-foreground);
+    opacity: 0.9;
+}
+
+.driver-popover-prev-btn {
+    background-color: transparent;
+    color: var(--muted-foreground);
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.9rem;
+}
+
+.driver-popover-prev-btn:hover {
+    background-color: var(--muted);
+    color: var(--foreground);
+}
+
+/* Tombol yang tidak bisa ditekan tetap terbaca sebagai tombol, cuma redup —
+   menyembunyikannya membuat tata letak tombol bergeser tiap langkah. */
+.driver-popover-prev-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.driver-popover-close-btn {
+    color: var(--muted-foreground);
+}
+
+.driver-popover-close-btn:hover {
+    color: var(--foreground);
+}
+
+/* Elemen yang sedang disorot ikut membulat, kalau tidak lubang di overlay
+   berbentuk kotak tajam di sekeliling menu yang sudutnya membulat. */
+.driver-active-element {
+    border-radius: var(--radius);
+}

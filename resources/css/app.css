@@ -1,0 +1,524 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    /* Plus Jakarta Sans, bukan sans-serif bawaan sistem: halaman auth sudah
+       memakainya sejak awal, jadi memilih font lain di sini akan membuat satu
+       produk terasa seperti dua aplikasi berbeda saat pengguna berpindah dari
+       layar masuk ke dashboard.
+
+       Dimuat dari Google Fonts di tiap layout, mengikuti cara yang sudah
+       dipakai halaman auth. Tumpukan cadangannya sengaja panjang: kalau
+       Google Fonts terhalang, halaman tetap terbaca dengan font sistem, bukan
+       jatuh ke Times New Roman. */
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-serif: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+
+    --color-chart-1: var(--chart-1);
+    --color-chart-2: var(--chart-2);
+    --color-chart-3: var(--chart-3);
+    --color-chart-4: var(--chart-4);
+    --color-chart-5: var(--chart-5);
+
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-ring: var(--sidebar-ring);
+
+    --radius-lg: var(--radius);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-sm: calc(var(--radius) - 4px);
+}
+
+/* ---------------------------------------------------------------------------
+   Palet: tema "Nature" dari tweakcn, dipilih karena logo Pesanvo bernuansa
+   hijau — warna aplikasi mengikuti logonya, bukan sebaliknya.
+
+   Nilainya disalin apa adanya dari preset supaya bisa dibandingkan langsung
+   dengan sumbernya. Yang sengaja TIDAK diikuti: font. Preset itu memakai
+   Montserrat/Merriweather, sedangkan Pesanvo memakai Plus Jakarta Sans —
+   font yang sama dengan halaman auth, supaya seluruh produk terasa satu.
+   --------------------------------------------------------------------------- */
+@layer base {
+    :root {
+        --background: #ffffff;
+        --foreground: #18181b;
+        --card: #ffffff;
+        --card-foreground: #18181b;
+        --popover: #ffffff;
+        --popover-foreground: #18181b;
+        --primary: #2e7d32;
+        --primary-foreground: #ffffff;
+        --secondary: #e8f5e9;
+        --secondary-foreground: #1b5e20;
+        --muted: #f4f4f5;
+        --muted-foreground: #71717a;
+        --accent: #e8f5e9;
+        --accent-foreground: #1b5e20;
+        --destructive: #c62828;
+        --destructive-foreground: #ffffff;
+        --border: #e4e4e7;
+        --input: #e4e4e7;
+        --ring: #2e7d32;
+        --radius: 0.5rem;
+
+        --chart-1: #4caf50;
+        --chart-2: #388e3c;
+        --chart-3: #2e7d32;
+        --chart-4: #1b5e20;
+        --chart-5: #0a1f0c;
+
+        --sidebar: #f4fbf5;
+        --sidebar-foreground: #18181b;
+        --sidebar-primary: #2e7d32;
+        --sidebar-primary-foreground: #ffffff;
+        --sidebar-accent: #e2f2e4;
+        --sidebar-accent-foreground: #1b5e20;
+        --sidebar-border: #e0eee2;
+        --sidebar-ring: #2e7d32;
+    }
+
+    .dark {
+        --background: #101a13;
+        --foreground: #f4f4f5;
+        --card: #17261c;
+        --card-foreground: #f4f4f5;
+        --popover: #17261c;
+        --popover-foreground: #f4f4f5;
+        --primary: #4caf50;
+        --primary-foreground: #0a1f0c;
+        --secondary: #213827;
+        --secondary-foreground: #d7e0d6;
+        --muted: #1a2b1f;
+        --muted-foreground: #a1a1aa;
+        --accent: #2b4932;
+        --accent-foreground: #f4f4f5;
+        --destructive: #ef4444;
+        --destructive-foreground: #ffffff;
+        --border: #233a29;
+        --input: #233a29;
+        --ring: #4caf50;
+
+        --chart-1: #81c784;
+        --chart-2: #66bb6a;
+        --chart-3: #4caf50;
+        --chart-4: #43a047;
+        --chart-5: #388e3c;
+
+        --sidebar: #101a13;
+        --sidebar-foreground: #f4f4f5;
+        --sidebar-primary: #4caf50;
+        --sidebar-primary-foreground: #0a1f0c;
+        --sidebar-accent: #213827;
+        --sidebar-accent-foreground: #f4f4f5;
+        --sidebar-border: #233a29;
+        --sidebar-ring: #4caf50;
+    }
+
+    /* Blok kode selalu gelap di kedua mode — ia meniru terminal, bukan
+       mengikuti tema halaman. Warnanya tetap diambil dari keluarga hijau
+       yang sama supaya tidak terlihat seperti tempelan dari tema lain. */
+    :root,
+    .dark {
+        --code-chrome: #071609;
+        --code-bg: #0a1f0c;
+        --code-foreground: #d7e0d6;
+        --code-muted: #7d9b82;
+        --code-string: #a5d6a7;
+        --code-payload: #ffcc80;
+    }
+
+    html {
+        color-scheme: light;
+    }
+
+    html.dark {
+        color-scheme: dark;
+    }
+
+    /* Scrollbar kustom WebKit / Chromium (4px — Sama dengan Pesanvo Client) */
+    *::-webkit-scrollbar,
+    ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    *::-webkit-scrollbar-track,
+    ::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+
+    *::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-thumb {
+        background: #E4E4E7;
+        border-radius: 4px;
+    }
+
+    *::-webkit-scrollbar-thumb:hover,
+    ::-webkit-scrollbar-thumb:hover {
+        background: #D4D4D8;
+    }
+
+    *::-webkit-scrollbar-corner,
+    ::-webkit-scrollbar-corner {
+        background: transparent !important;
+    }
+
+    /* Scrollbar mode gelap: tidak ada track putih, thumb halus */
+    html.dark *::-webkit-scrollbar-track,
+    html.dark ::-webkit-scrollbar-track,
+    .dark *::-webkit-scrollbar-track,
+    .dark ::-webkit-scrollbar-track {
+        background: transparent !important;
+    }
+
+    html.dark *::-webkit-scrollbar-thumb,
+    html.dark ::-webkit-scrollbar-thumb,
+    .dark *::-webkit-scrollbar-thumb,
+    .dark ::-webkit-scrollbar-thumb {
+        background: #27272A !important;
+        border-radius: 4px;
+    }
+
+    html.dark *::-webkit-scrollbar-thumb:hover,
+    html.dark ::-webkit-scrollbar-thumb:hover,
+    .dark *::-webkit-scrollbar-thumb:hover,
+    .dark ::-webkit-scrollbar-thumb:hover {
+        background: #3F3F46 !important;
+    }
+
+    /* Firefox (tidak mendukung ::-webkit-scrollbar) */
+    @supports not selector(::-webkit-scrollbar) {
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #E4E4E7 transparent;
+        }
+
+        html.dark,
+        html.dark * {
+            scrollbar-color: #27272A transparent;
+        }
+    }
+
+    html, body {
+        overflow-x: clip;
+        max-width: 100%;
+    }
+    body {
+        @apply bg-background text-foreground;
+        letter-spacing: 0em;
+    }
+
+    input:where(:not([type='checkbox'], [type='radio'], [type='hidden'], [type='submit'], [type='button'], [type='file'], [type='range'], [type='color'])),
+    textarea,
+    select {
+        @apply border border-input bg-background px-3 py-2 text-base md:text-sm text-foreground shadow-sm transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50;
+    }
+}
+
+/* x-cloak menyembunyikan elemen Alpine sampai Alpine sempat menjalankannya —
+   tanpa ini modal QR berkedip terbuka sesaat setiap kali halaman dimuat. */
+[x-cloak] {
+    display: none !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Tirai — dipakai panel dropdown di header halaman depan.
+
+   Panelnya tidak meluncur atau membesar, melainkan tersingkap dari atas ke
+   bawah: kotaknya sudah pada ukuran akhirnya sejak awal, yang bergerak cuma
+   batas potongnya. Isinya jadi tidak ikut bergeser, jadi mata pembaca tidak
+   perlu mengejar tulisan yang sedang berpindah.
+   --------------------------------------------------------------------------- */
+@keyframes tirai-turun {
+    from { clip-path: inset(0 0 100% 0); opacity: 0; }
+    to { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+
+@keyframes tirai-naik {
+    from { clip-path: inset(0 0 0 0); opacity: 1; }
+    to { clip-path: inset(0 0 100% 0); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .tirai-masuk { animation: tirai-turun 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .tirai-keluar { animation: tirai-naik 0.2s cubic-bezier(0.22, 1, 0.36, 1) both; }
+}
+
+/* ---------------------------------------------------------------------------
+   Muncul saat digulir — dipakai di halaman depan.
+
+   Setelah kartu dilepas, tidak ada lagi garis yang memisahkan satu blok dari
+   blok berikutnya. Pemisahnya dipindahkan ke waktu: tiap blok masuk sedikit
+   terlambat dari yang di atasnya.
+
+   Keadaan tersembunyinya hanya berlaku di bawah .animasi-muncul, dan kelas
+   itu dipasang oleh skrip di <head> — hanya kalau IntersectionObserver ada
+   dan pengguna tidak meminta gerak seminimal mungkin. Tanpa penjagaan itu,
+   JavaScript yang gagal dimuat akan menyembunyikan seluruh isi halaman
+   selamanya, menunggu pemicu yang tidak akan pernah datang.
+   --------------------------------------------------------------------------- */
+/* ---------------------------------------------------------------------------
+   Sidebar dashboard.
+
+   Hanya bergeser di layar kecil; mulai 1024px ia menetap di tepi kiri dan
+   `lg:pl-64` pada konten yang memberinya ruang.
+
+   Ditulis tangan alih-alih memakai `-translate-x-full` dari Tailwind: dua
+   aturan yang menyebut `transform` langsung lebih mudah ditelusuri daripada
+   utilitas v4 yang menyusun nilainya dari `--tw-translate-x/y/z`, dan di sini
+   tidak ada yang perlu dikomposisi.
+   --------------------------------------------------------------------------- */
+@media (max-width: 1023px) {
+    .panel-sidebar {
+        transform: translateX(-100%);
+    }
+
+    .panel-sidebar.terbuka {
+        transform: translateX(0);
+    }
+}
+
+.animasi-muncul .muncul {
+    opacity: 0;
+    transform: translateY(18px);
+}
+
+.animasi-muncul .muncul.terlihat {
+    opacity: 1;
+    transform: none;
+    transition:
+        opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--tunda, 0ms),
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--tunda, 0ms);
+}
+
+/* ---------------------------------------------------------------------------
+   Isi dokumentasi.
+
+   HTML-nya dihasilkan dari markdown, jadi tidak bisa diberi class Tailwind
+   satu per satu — penataannya dilakukan lewat pemilih elemen di dalam
+   .doc-body. Sengaja tidak memakai plugin typography agar tidak menambah
+   dependensi hanya untuk satu bagian aplikasi.
+   --------------------------------------------------------------------------- */
+.doc-body {
+    line-height: 1.8;
+    color: var(--color-foreground);
+    font-size: 0.95rem;
+}
+
+.doc-body > * + * { margin-top: 1.35rem; }
+
+.doc-body h2,
+.doc-body h3,
+.doc-body h4 {
+    font-weight: 700;
+    color: var(--color-foreground);
+    scroll-margin-top: 5.5rem;
+    letter-spacing: -0.02em;
+}
+
+.doc-body h2 {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 1.45rem;
+}
+
+.doc-body > h2:first-child {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.doc-body h3 { margin-top: 2rem; font-size: 1.15rem; }
+.doc-body h4 { margin-top: 1.5rem; font-size: 1rem; }
+
+.doc-body p {
+    color: var(--color-muted-foreground);
+    line-height: 1.8;
+}
+
+.doc-body a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+    transition: opacity 0.15s;
+}
+
+.doc-body a:hover { opacity: 0.8; }
+
+.doc-body strong { font-weight: 600; color: var(--color-foreground); }
+
+.doc-body ul,
+.doc-body ol { 
+    padding-left: 1.5rem; 
+    color: var(--color-muted-foreground);
+}
+.doc-body ul { list-style: disc; }
+.doc-body ol { list-style: decimal; }
+.doc-body li + li { margin-top: 0.45rem; }
+.doc-body li > ul,
+.doc-body li > ol { margin-top: 0.45rem; }
+
+.doc-body code {
+    padding: 0.18em 0.45em;
+    border-radius: 0.375rem;
+    background: var(--color-muted);
+    color: var(--color-foreground);
+    font-size: 0.85em;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    border: 1px solid var(--color-border);
+    word-break: break-word;
+}
+
+.doc-body pre {
+    position: relative;
+    overflow-x: auto;
+    padding: 1.25rem;
+    border-radius: 0.875rem;
+    background: #0f172a;
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.825rem;
+    line-height: 1.75;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.dark .doc-body pre {
+    background: #090e17;
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+.doc-body pre code {
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: inherit;
+    word-break: normal;
+}
+
+.doc-body table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.doc-body th,
+.doc-body td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: top;
+}
+
+.doc-body tr:last-child td {
+    border-bottom: none;
+}
+
+.doc-body th {
+    background: var(--color-muted);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    color: var(--color-foreground);
+}
+
+.doc-body blockquote {
+    position: relative;
+    padding: 1rem 1.25rem;
+    border-left: 4px solid var(--color-primary);
+    border-radius: 0 0.75rem 0.75rem 0;
+    background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+    color: var(--color-foreground);
+    font-size: 0.925rem;
+}
+
+.doc-body blockquote > * + * { margin-top: 0.5rem; }
+
+.doc-body hr {
+    margin: 2.5rem 0;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.doc-body input[type='checkbox'] { margin-right: 0.4rem; }
+
+/* ---------------------------------------------------------------------------
+   Marquee metode pembayaran & hero ekosistem.
+   --------------------------------------------------------------------------- */
+@keyframes pesanvo-marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+.pesanvo-pay-track {
+    animation: pesanvo-marquee-scroll 35s linear infinite;
+    will-change: transform;
+}
+
+.pesanvo-hero-track {
+    display: flex;
+    width: max-content;
+    animation: pesanvo-marquee-scroll 30s linear infinite;
+    will-change: transform;
+}
+
+.pesanvo-pay-marquee:hover .pesanvo-pay-track,
+.pesanvo-hero-marquee:hover .pesanvo-hero-track {
+    animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pesanvo-pay-track,
+    .pesanvo-hero-track { animation: none; }
+}
+

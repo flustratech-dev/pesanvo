@@ -1,0 +1,16 @@
+# Nixpacks untuk container tunggal pesanvo.
+#
+# Sejak 17 Agustus 2026 satu container menjalankan Laravel DAN engine
+# Baileys (websocket murni, lihat start.sh).
+#
+# Karena Baileys menggunakan websocket murni tanpa Chromium/Puppeteer,
+# container tidak lagi memerlukan library GUI/Chromium seperti libnss3,
+# libatk, dsb.
+#
+# `curl` dipakai start.sh untuk menunggu Laravel siap sebelum engine boot.
+
+[phases.setup]
+  aptPkgs = [
+    '...',
+    'curl',
+  ]

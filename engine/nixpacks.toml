@@ -1,0 +1,7 @@
+# Nixpacks untuk engine Baileys (websocket murni).
+# Tidak memerlukan Chromium atau library GUI.
+
+[phases.setup]
+  aptPkgs = [
+    '...',
+  ]
